@@ -42,7 +42,7 @@ Mutation: {
 
         return { token, user };
     },
-    saveBook: async (parent, { BookID }, context) => {
+    storeBook: async (parent, { BookID }, context) => {
         if (context.user) {
         const book = await Book.create({
             BookID,
