@@ -64,7 +64,7 @@ const SearchBooks = () => {
 
     try {
       const { data } = storeBook({
-        variables: { bookData },
+        variables: { searchedBooks },
       });
 
       window.location.reload();
