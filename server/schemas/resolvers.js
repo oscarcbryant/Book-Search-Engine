@@ -8,14 +8,14 @@ const resolvers = {
     users: async () =>{
         return User.find().populate('books');
     },
-    
+
     user: async (parent, { username }) => {
         return User.findOne({ username }).populate('books');
     },
 
     me: async (parent, args, context) => {
         if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('books');
+        return User.findOne({ _id: context.user._id });
         }
         throw new AuthenticationError('You need to be logged in!');
     },
@@ -43,15 +43,17 @@ Mutation: {
 
         return { token, user };
     },
-    storeBook: async (parent, { BookID }, context) => {
+    storeBook: async (parent, args, context) => {
         if (context.user) {
-        const book = await Book.create({
-            BookID,
-        });
+        console.log(args);
 
-        await User.findOneAndUpdate(
+
+        let user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $addToSet: { books: book._id } }
+            { $push: { savedBooks: { ...args }} },
+            { 
+                new: true
+            }
         );
 
         return user;
