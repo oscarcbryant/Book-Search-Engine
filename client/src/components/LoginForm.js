@@ -30,16 +30,16 @@ const LoginForm = () => {
       event.stopPropagation();
     }
 
+    console.log(userFormData);
+
     try {
-      const response = await loginUser(userFormData);
+      const { data } = await loginUser({
+      variables: { ...userFormData }
+      });
+      console.log(data);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
+      Auth.login(data.login.token);
+      console.log(data.login.user);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
