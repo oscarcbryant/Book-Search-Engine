@@ -43,7 +43,7 @@ Mutation: {
 
         return { token, user };
     },
-    storeBook: async (parent, args, context) => {
+    saveBook: async (parent, args, context) => {
         if (context.user) {
         console.log(args);
 
