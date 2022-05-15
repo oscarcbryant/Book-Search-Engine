@@ -26,11 +26,12 @@ mutation addUser ($username: String!, $email: String!, $password: String!){
 `;
 
 export const SAVE_BOOK = gql`
-mutation storeBook($authors: [String]!, $title: String!, $image: String!, $link: String!){
-    storeBook(authors: $authors, title: $title, image: $image, link: $link) {
+mutation storeBook($bookid: ID, $authors: [String]!, $title: String!, $description: String! $image: String!, $link: String!){
+    storeBook(authors: $authors, title: $title, description: $description, image: $image, link: $link) {
         _id
         authors
         title
+        description
         image
         link
     }

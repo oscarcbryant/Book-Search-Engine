@@ -17,10 +17,10 @@ type Book {
     link: String
 }
 
-input saveBook {
+type saveBook {
+    bookid: ID
     authors: [String]
     title: String
-    bookID: ID
     description: String
     image: String
     link: String
